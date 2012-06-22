@@ -3,19 +3,19 @@ import sieve.xml_compare as c
 import sys
 
 
-def assert_eq_xhtml(xml1, xml2, msg=None, wrapped=False):
+def assert_eq_xml(xml1, xml2, msg=None, wrapped=False):
     if not message:
         buf = StringIO.StringIO()
         reporter = lambda x: buf.write(x + '\n')
-        result = eq_xhtml(xml1, xml2)
+        result = eq_xml(xml1, xml2)
         if not result:
             reason = buf.getvalue()
             assert result, reason
     else:
-        assert eq_xhtml(xml1, xml2), msg
+        assert eq_xml(xml1, xml2), msg
 
 
-def eq_xhtml(xml1, xml2, reporter=None, wrapped=False):
+def eq_xml(xml1, xml2, reporter=None, wrapped=False):
     wrapper = lambda x: x.strip()
     if wrapped:
         wrapper = lambda x: "<wrap>" + x + "</wrap>"

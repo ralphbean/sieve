@@ -3,7 +3,7 @@ import sieve.operators as ops
 from nose.tools import raises
 
 
-def test_eq_xhtml():
+def test_eq_xml():
     b = "<foo><bar>Value</bar></foo>"
     c = """
 <foo>
@@ -12,7 +12,7 @@ def test_eq_xhtml():
     </bar>
 </foo>
 """
-    ops.eq_xhtml(b, c)
+    ops.eq_xml(b, c)
 
 
 def test_eq_html_wrapped():
@@ -24,15 +24,15 @@ def test_eq_html_wrapped():
         Value
     </bar>
 """
-    ops.eq_xhtml(b, c, wrapped=True)
+    ops.eq_xml(b, c, wrapped=True)
 
 
 @raises(lxml.etree.XMLSyntaxError)
-def test_bad_xhtml():
+def test_bad_xml():
     b = '<foo'
-    ops.eq_xhtml(b, b)
+    ops.eq_xml(b, b)
 
 
 @raises(lxml.etree.XMLSyntaxError)
-def test_bad_xhtml_too():
-    ops.eq_xhtml("<foo/>", '<foo')
+def test_bad_xml_too():
+    ops.eq_xml("<foo/>", '<foo')
