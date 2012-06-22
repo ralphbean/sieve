@@ -14,7 +14,7 @@ def long_description():
     f.close()
     return '\n'.join(lines[3:])
 
-version = '0.1.3'
+version = '0.1.4'
 
 setup(name='sieve',
       version=version,
@@ -22,7 +22,7 @@ setup(name='sieve',
       long_description=long_description(),
       # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-          "Development Status :: 3 - Alpha",
+          "Development Status :: 4 - Beta",
           "License :: OSI Approved :: MIT License",
           "Topic :: Software Development :: Libraries",
           "Topic :: Software Development :: Testing",
