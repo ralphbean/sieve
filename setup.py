@@ -14,7 +14,7 @@ def long_description():
     f.close()
     return content.split('split here', 1)[1]
 
-version = '0.1.4'
+version = '0.1.6'
 
 setup(name='sieve',
       version=version,
