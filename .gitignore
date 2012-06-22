@@ -1,0 +1,9 @@
+*.pyc
+*.swp
+*.pyo
+.build
+build
+*.egg*
+dist
+test.html
+*.pdf
