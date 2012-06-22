@@ -14,7 +14,7 @@ def long_description():
     f.close()
     return '\n'.join(lines[2:])
 
-version = '0.1.1'
+version = '0.1.2'
 
 setup(name='sieve',
       version=version,

@@ -3,6 +3,10 @@ import sieve.operators as ops
 from nose.tools import raises
 
 
+@raises(AssertionError)
+def test_assert_eq_xml():
+    ops.assert_eq_xml("<foo></foo>", "<bar></bar>")
+
 def test_eq_xml():
     b = "<foo><bar>Value</bar></foo>"
     c = """
