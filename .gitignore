@@ -3,7 +3,7 @@
 *.pyo
 .build
 build
-*.egg-info
+*.egg*
 dist
 test.html
 *.pdf
