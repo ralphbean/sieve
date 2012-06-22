@@ -14,7 +14,7 @@ def long_description():
     f.close()
     return content.split('split here', 1)[1]
 
-version = '0.1.4'
+version = '0.1.5'
 
 setup(name='sieve',
       version=version,
@@ -29,6 +29,7 @@ setup(name='sieve',
           "Topic :: Text Processing :: Markup :: HTML",
           "Topic :: Text Processing :: Markup :: XML",
           "Programming Language :: Python :: 2",
+          "Programming Language :: Python :: 2.5",
           "Programming Language :: Python :: 2.6",
           "Programming Language :: Python :: 2.7",
           "Programming Language :: Python :: 3",
