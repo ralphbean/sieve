@@ -12,7 +12,7 @@ def long_description():
     f = open("README.rst")
     lines = f.readlines()
     f.close()
-    return '\n'.join(lines[2:])
+    return '\n'.join(lines[3:])
 
 version = '0.1.3'
 
