@@ -33,7 +33,7 @@ For Example
 There are two main functions you might care to use: ``eq_xml``
 and ``in_xml``::
 
-    >>> from strainer.operators import eq_xml
+    >>> from strainer.operators import eq_xml, in_xml
     >>> a = "<foo><bar>Value</bar></foo>"
     >>> b = """
     ... <foo>
