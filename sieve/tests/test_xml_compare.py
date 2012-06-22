@@ -1,12 +1,13 @@
 import sieve.xml_compare as c
+import six
 
 def test_basic():
-    xml1 = """    <?xml version='1.0' encoding='utf-8' standalone='yes'?>
-        <Stats start="1275955200" end="1276041599"></Stats>"""
-    xml2 = """     <?xml version='1.0' encoding='utf-8' standalone='yes'?>
-        <Stats start="1275955200" end="1276041599"></Stats>"""
-    xml3 = """ <?xml version='1.0' encoding='utf-8' standalone='yes'?>
-        <Stats start="1275955200"></Stats>"""
+    xml1 = six.u("""    <?xml version='1.0' encoding='utf-8' standalone='yes'?>
+        <Stats start="1275955200" end="1276041599"></Stats>""").encode('utf-8')
+    xml2 = six.u("""     <?xml version='1.0' encoding='utf-8' standalone='yes'?>
+        <Stats start="1275955200" end="1276041599"></Stats>""").encode('utf-8')
+    xml3 = six.u(""" <?xml version='1.0' encoding='utf-8' standalone='yes'?>
+        <Stats start="1275955200"></Stats>""").encode('utf-8')
 
     from lxml import etree
     tree1 = etree.fromstring(xml1.strip())

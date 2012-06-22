@@ -3,6 +3,8 @@ Originally ripped from FormEncode, with love.
 """
 
 import doctest
+import six
+from six.moves import zip
 
 try:
     import xml.etree.ElementTree as ET
@@ -11,11 +13,6 @@ except ImportError:
 from xml.parsers.expat import ExpatError as XMLParseError
 
 RealOutputChecker = doctest.OutputChecker
-
-
-def debug(*msg):
-    import sys
-    print >> sys.stderr, ' '.join(map(str, msg))
 
 
 class HTMLOutputChecker(RealOutputChecker):
@@ -45,7 +42,7 @@ class HTMLOutputChecker(RealOutputChecker):
         try:
             want_xml = make_xml(example.want)
             want_norm = make_string(want_xml)
-        except XMLParseError, e:
+        except XMLParseError as e:
             if example.want.startswith('<'):
                 want_norm = '(bad XML: %s)' % e
                 #  '<xml>%s</xml>' % example.want
@@ -54,7 +51,7 @@ class HTMLOutputChecker(RealOutputChecker):
         try:
             got_xml = make_xml(got)
             got_norm = make_string(got_xml)
-        except XMLParseError, e:
+        except XMLParseError as e:
             if example.want.startswith('<'):
                 got_norm = '(bad XML: %s)' % e
             else:
@@ -132,7 +129,7 @@ def make_xml(s):
 
 
 def make_string(xml):
-    if isinstance(xml, (str, unicode)):
+    if isinstance(xml, (str, six.text_type)):
         xml = make_xml(xml)
     s = ET.tostring(xml)
     if s == '<xml />':

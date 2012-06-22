@@ -8,15 +8,32 @@ try:
 except:
     pass
 
+def long_description():
+    f = open("README.rst")
+    lines = f.readlines()
+    f.close()
+    return '\n'.join(lines[2:])
+
 version = '0.1'
 
 setup(name='sieve',
       version=version,
-      description="XML Comparison",
-      long_description="""\
-""",
+      description="XML Comparison Utils",
+      long_description=long_description(),
       # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
-      classifiers=[],
+      classifiers=[
+          "Development Status :: 3 - Alpha",
+          "License :: OSI Approved :: MIT License",
+          "Topic :: Software Development :: Libraries",
+          "Topic :: Software Development :: Testing",
+          "Topic :: Text Processing :: Markup :: HTML",
+          "Topic :: Text Processing :: Markup :: XML",
+          "Programming Language :: Python :: 2",
+          "Programming Language :: Python :: 2.6",
+          "Programming Language :: Python :: 2.7",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3.2",
+      ],
       keywords='',
       author='Ralph Bean',
       author_email='rbean@redhat.com',
@@ -27,6 +44,7 @@ setup(name='sieve',
       zip_safe=False,
       install_requires=[
           'lxml',
+          'six',
       ],
       tests_require=[
           'nose',
