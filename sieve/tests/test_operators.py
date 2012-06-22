@@ -7,6 +7,7 @@ from nose.tools import raises
 def test_assert_eq_xml():
     ops.assert_eq_xml("<foo></foo>", "<bar></bar>")
 
+
 def test_eq_xml():
     b = "<foo><bar>Value</bar></foo>"
     c = """
@@ -16,7 +17,7 @@ def test_eq_xml():
     </bar>
 </foo>
 """
-    ops.eq_xml(b, c)
+    assert ops.eq_xml(b, c)
 
 
 def test_eq_html_wrapped():
@@ -28,7 +29,49 @@ def test_eq_html_wrapped():
         Value
     </bar>
 """
-    ops.eq_xml(b, c, wrapped=True)
+    assert ops.eq_xml(b, c, wrapped=True)
+
+
+def test_in_html_valid():
+    inputs = [
+        (
+            "<foo>bar</foo>",
+            "<foo>bar</foo>"
+        ),
+        (
+            "<foo>bar</foo>",
+            "<body><foo>bar</foo></body>"
+        ),
+        (
+            "<foo>bar</foo>",
+            "<html><head>blah</head><body><foo>bar</foo></body></html>"
+        ),
+    ]
+    for needle, haystack in inputs:
+        def test(n, h):
+            assert ops.in_xml(n, h)
+        yield test, needle, haystack
+
+
+def test_in_html_invalid():
+    inputs = [
+        (
+            "<foo>bar</foo>",
+            "<body><foo><baz/>bar</foo></body>"
+        ),
+        (
+            "<foo>bar</foo>",
+            "<body><foo></foo></body>"
+        ),
+        (
+            "<foo>bar</foo>",
+            "<html><head>blah</head><body><foo><baz/>bar</foo></body></html>"
+        ),
+    ]
+    for needle, haystack in inputs:
+        def test(n, h):
+            assert not ops.in_xml(n, h)
+        yield test, needle, haystack
 
 
 @raises(lxml.etree.XMLSyntaxError)

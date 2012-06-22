@@ -65,7 +65,7 @@ class HTMLOutputChecker(RealOutputChecker):
         return s
 
 
-def xml_compare(x1, x2, reporter=None):
+def nodes_match(x1, x2, reporter=None):
     if x1.tag != x2.tag:
         if reporter:
             reporter('Tags do not match: %s and %s' % (x1.tag, x2.tag))
@@ -93,6 +93,14 @@ def xml_compare(x1, x2, reporter=None):
     if not text_compare(x1.tail, x2.tail):
         if reporter:
             reporter('tail: %r != %r' % (x1.tail, x2.tail))
+        return False
+
+    return True
+
+
+def xml_compare(x1, x2, reporter=None):
+
+    if not nodes_match(x1, x2, reporter):
         return False
 
     cl1 = x1.getchildren()
@@ -136,3 +144,13 @@ def make_string(xml):
         return ''
     assert s.startswith('<xml>') and s.endswith('</xml>'), repr(s)
     return s[5:-6]
+
+
+def xml_contains(needle, haystack, reporter=None, __on_to_something=False):
+    if xml_compare(needle, haystack, reporter):
+        return True
+    else:
+        for child in haystack.getchildren():
+            if xml_contains(needle, child, reporter):
+                return True
+        return False
