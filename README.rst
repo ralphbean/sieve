@@ -1,7 +1,11 @@
 sieve
 =====
 
+:Author: Ralph Bean <rbean@redhat.com>
+
 XML Comparison Utils
+
+.. comment: split here
 
 Ripped from `FormEncode <http://pypi.python.org/pypi/FormEncode>`_ and `strainer
 <http://pypi.python.org/pypi/strainer>`_ just to support Pythons 2 and 3.
