@@ -10,9 +10,9 @@ except:
 
 def long_description():
     f = open("README.rst")
-    lines = f.readlines()
+    content = f.read().strip()
     f.close()
-    return '\n'.join(lines[3:])
+    return content.split('split here', 1)[1]
 
 version = '0.1.4'
 
