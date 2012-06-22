@@ -1,18 +1,19 @@
 from lxml import etree
 import sieve.xml_compare as c
 import sys
+import six
 
 
-def assert_eq_xml(xml1, xml2, msg=None, wrapped=False):
+def assert_eq_xml(xml1, xml2, message=None, wrapped=False):
     if not message:
-        buf = StringIO.StringIO()
+        buf = six.StringIO()
         reporter = lambda x: buf.write(x + '\n')
         result = eq_xml(xml1, xml2)
         if not result:
             reason = buf.getvalue()
             assert result, reason
     else:
-        assert eq_xml(xml1, xml2), msg
+        assert eq_xml(xml1, xml2), message
 
 
 def eq_xml(xml1, xml2, reporter=None, wrapped=False):
