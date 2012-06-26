@@ -8,7 +8,7 @@ def assert_eq_xml(xml1, xml2, message=None, wrapped=False):
     if not message:
         buf = six.StringIO()
         reporter = lambda x: buf.write(x + '\n')
-        result = eq_xml(xml1, xml2)
+        result = eq_xml(xml1, xml2, reporter=reporter, wrapped=wrapped)
         if not result:
             reason = buf.getvalue()
             assert result, reason
@@ -20,7 +20,7 @@ def assert_in_xml(needle, haystack, message=None, wrapped=False):
     if not message:
         buf = six.StringIO()
         reporter = lambda x: buf.write(x + '\n')
-        result = in_xml(needle, haystack)
+        result = in_xml(needle, haystack, reporter=reporter, wrapped=wrapped)
         if not result:
             reason = buf.getvalue()
             assert result, reason
