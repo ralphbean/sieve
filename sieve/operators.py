@@ -1,8 +1,18 @@
-from lxml import etree
+from __future__ import absolute_import
+
+from lxml import etree, html
 import sieve.xml_compare as c
+import markupsafe
 import sys
 import six
 
+
+def _xml_from_string(string):
+    try:
+        return html.fromstring(string)
+    except etree.XMLSyntaxError:
+        print("choked on: " + string)
+        raise
 
 def assert_eq_xml(xml1, xml2, message=None, wrapped=False):
     if not message:
@@ -33,8 +43,8 @@ def eq_xml(xml1, xml2, reporter=None, wrapped=False):
     if wrapped:
         wrapper = lambda x: "<wrap>" + x + "</wrap>"
 
-    tree1 = etree.fromstring(wrapper(xml1))
-    tree2 = etree.fromstring(wrapper(xml2))
+    tree1 = _xml_from_string(wrapper(xml1))
+    tree2 = _xml_from_string(wrapper(xml2))
     return c.xml_compare(tree1, tree2, reporter)
 
 
@@ -43,6 +53,6 @@ def in_xml(needle, haystack, reporter=None, wrapped=False):
     if wrapped:
         wrapper = lambda x: "<wrap>" + x + "</wrap>"
 
-    tree1 = etree.fromstring(wrapper(needle))
-    tree2 = etree.fromstring(wrapper(haystack))
+    tree1 = _xml_from_string(wrapper(needle))
+    tree2 = _xml_from_string(wrapper(haystack))
     return c.xml_contains(tree1, tree2, reporter)
