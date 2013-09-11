@@ -16,7 +16,7 @@ def long_description():
 
 
 setup(name='sieve',
-      version='0.1.8',
+      version='0.1.9',
       description="XML Comparison Utils",
       long_description=long_description(),
       # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
