@@ -45,6 +45,7 @@ setup(name='sieve',
       install_requires=[
           'lxml',
           'six',
+          'markupsafe',
       ],
       tests_require=[
           'nose',
