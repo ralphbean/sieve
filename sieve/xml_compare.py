@@ -64,6 +64,7 @@ class HTMLOutputChecker(RealOutputChecker):
             s += 'Difference report:\n%s\n' % '\n'.join(result)
         return s
 
+ignored_attributes = ["xmlns:py"]
 
 def nodes_match(x1, x2, reporter=None):
     if not reporter:
@@ -74,12 +75,16 @@ def nodes_match(x1, x2, reporter=None):
         return False
 
     for name, value in x1.attrib.items():
+        if name in ignored_attributes:
+            continue
         if x2.attrib.get(name) != value:
             reporter('Attributes do not match: %s=%r, %s=%r'
                      % (name, value, name, x2.attrib.get(name)))
             return False
 
     for name in x2.attrib.keys():
+        if name in ignored_attributes:
+            continue
         if name not in x1.attrib:
             reporter('x2 has an attribute x1 is missing: %s'
                      % name)

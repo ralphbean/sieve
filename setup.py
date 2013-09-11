@@ -14,10 +14,9 @@ def long_description():
     f.close()
     return content.split('split here', 1)[1]
 
-version = '0.1.8'
 
 setup(name='sieve',
-      version=version,
+      version='0.1.9',
       description="XML Comparison Utils",
       long_description=long_description(),
       # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -45,6 +44,7 @@ setup(name='sieve',
       install_requires=[
           'lxml',
           'six',
+          'markupsafe',
       ],
       tests_require=[
           'nose',

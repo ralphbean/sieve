@@ -48,10 +48,14 @@ def test_in_html_valid():
         ),
     ]
     for needle, haystack in inputs:
-        def test(n, h):
+        def test1(n, h):
             assert ops.in_xml(n, h)
-        yield test, needle, haystack
 
+        def test2(n, h):
+            ops.assert_in_xml(n, h)
+
+        yield test1, needle, haystack
+        yield test2, needle, haystack
 
 def test_in_html_invalid():
     inputs = [
@@ -72,14 +76,3 @@ def test_in_html_invalid():
         def test(n, h):
             assert not ops.in_xml(n, h)
         yield test, needle, haystack
-
-
-@raises(lxml.etree.XMLSyntaxError)
-def test_bad_xml():
-    b = '<foo'
-    ops.eq_xml(b, b)
-
-
-@raises(lxml.etree.XMLSyntaxError)
-def test_bad_xml_too():
-    ops.eq_xml("<foo/>", '<foo')
